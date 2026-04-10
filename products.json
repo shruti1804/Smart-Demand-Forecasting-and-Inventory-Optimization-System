@@ -1,10 +1,10 @@
 [
   {
-    "name": "chips",
-    "price": 20.0,
-    "supplier_cost": 10.0,
-    "unit": "packet",
+    "name": "butter",
+    "price": 55.0,
+    "supplier_cost": 55.0,
+    "unit": "package",
     "owner": "admin",
-    "created_at": "2026-04-07"
+    "created_at": "2026-04-10"
   }
 ]

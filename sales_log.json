@@ -162,5 +162,25 @@
     "price": 20.0,
     "supplier_cost": 10.0,
     "date": "2026-04-07"
+  },
+  {
+    "owner": "admin",
+    "product_name": "chips",
+    "quantity_sold": 55.0,
+    "stock_level": 55.0,
+    "stock_added": 55.0,
+    "price": 20.0,
+    "supplier_cost": 10.0,
+    "date": "2026-04-10"
+  },
+  {
+    "owner": "admin",
+    "product_name": "butter",
+    "quantity_sold": 40.0,
+    "stock_level": 80.0,
+    "stock_added": 60.0,
+    "price": 55.0,
+    "supplier_cost": 55.0,
+    "date": "2026-04-10"
   }
 ]

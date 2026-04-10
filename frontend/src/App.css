@@ -14,7 +14,7 @@ body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #1a1a2e;
 }
 .logo { display: flex; align-items: center; gap: 8px; }
 .logo-icon { font-size: 20px; color: #4fc3f7; }
-.logo-text { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; color: white; }
+.logo-text { font-size: 20px; font-weight: 700; letter-spacing: -0.5px; color: rgb(30, 40, 179); }
 .header-right { display: flex; align-items: center; gap: 12px; }
 .header-user { font-size: 13px; color: #90caf9; }
 .btn-logout {
