@@ -16,11 +16,11 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://smart-demand-forecasting-and-invent.vercel.app"  
+        "https://smart-demand-forecasting-and-invent.vercel.app"
     ],
-    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=True,
 )
 
 # ── Model loading ────────────────────────────────────────────
@@ -174,19 +174,16 @@ def delete_product(product_name: str, username: str = Depends(get_current_user))
 
         save_products(updated)
 
+        # ✅ 🔥 FIXED PART (IMPORTANT)
         sales = load_sales()
-        updated_sales = []
-
-        for s in sales:
-            s_name = (s.get("product_name") or "").strip().lower()
-            s_owner = s.get("owner")
-
-            if s_owner == username and s_name == product_name:
-                continue
-
-            updated_sales.append(s)
-
-        save_sales(updated_sales)
+        sales = [
+            s for s in sales
+            if not (
+                s.get("owner", "") == username and
+                s.get("product_name", "").strip().lower() == product_name
+            )
+        ]
+        save_sales(sales)
 
         return {"status": "deleted", "product": product_name}
 
