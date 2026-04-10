@@ -25,19 +25,32 @@ export default function ProductManager() {
     setLoading(true);
     try {
       await addProduct({
-        name: form.name,
-        price: parseFloat(form.price),
-        supplier_cost: parseFloat(form.supplier_cost),
-        unit: form.unit || "units"
+      name: form.name,
+      price: parseFloat(form.price),
+      supplier_cost: parseFloat(form.supplier_cost),
+      unit: form.unit || "units"
       });
+
       setSuccess(`"${form.name}" added successfully.`);
+      setError("");
+
+      setTimeout(() => {
+      setSuccess("");
+      }, 3000);
+
       setForm({ name: "", price: "", supplier_cost: "", unit: "units" });
       fetchProducts();
+
     } catch (e) {
       setError(e.response?.data?.detail || "Failed to add product.");
+      setSuccess("");
+
+      setTimeout(() => {
+      setError("");
+      }, 3000);
     }
-    setLoading(false);
-  };
+
+setLoading(false);
 
   const handleDelete = async (name) => {
     if (!window.confirm(`Delete "${name}" and all its sales data?`)) return;
