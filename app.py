@@ -12,12 +12,16 @@ import joblib, pandas as pd, numpy as np, io
 app = FastAPI(title="Demand Forecasting API")
 
 # CORS MUST be added immediately after app creation, before any routes
+# In app.py, update the allow_origins line:
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # for development
-    allow_credentials=True,
+    allow_origins=[
+        "http://localhost:3000",
+        "https://your-app-name.vercel.app"   # replace after Vercel deploy
+    ],
     allow_methods=["*"],
     allow_headers=["*"],
+    allow_credentials=True,
 )
 
 # ── Model loading ────────────────────────────────────────────

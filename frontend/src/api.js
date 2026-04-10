@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const BASE = "http://127.0.0.1:8000";
+// const BASE = "http://127.0.0.1:8000";
+const BASE = "https://demandiq-backend.onrender.com";
 
 const authHeader = () => {
   const user = JSON.parse(localStorage.getItem("diq_user") || "null");
