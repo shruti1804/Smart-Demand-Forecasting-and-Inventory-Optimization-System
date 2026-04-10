@@ -145,32 +145,47 @@ def add_product(product: ProductInput, username: str = Depends(get_current_user)
 @app.delete("/products/{product_name}")
 def delete_product(product_name: str, username: str = Depends(get_current_user)):
     try:
+        product_name = product_name.strip().lower()
+
         products = load_products()
 
-        # ✅ SAFE delete logic
-        updated = [
-            p for p in products
-            if not (p.get("owner") == username and p.get("name") == product_name)
-        ]
+        updated = []
+        found = False
 
-        if len(updated) == len(products):
+        for p in products:
+            p_name = (p.get("name") or "").strip().lower()
+            p_owner = p.get("owner")
+
+            if p_owner == username and p_name == product_name:
+                found = True
+                continue
+
+            updated.append(p)
+
+        if not found:
             raise HTTPException(status_code=404, detail="Product not found.")
 
         save_products(updated)
 
-        # ✅ ALSO SAFE for sales
         sales = load_sales()
-        sales = [
-            s for s in sales
-            if not (s.get("owner") == username and s.get("product_name") == product_name)
-        ]
-        save_sales(sales)
+        updated_sales = []
+
+        for s in sales:
+            s_name = (s.get("product_name") or "").strip().lower()
+            s_owner = s.get("owner")
+
+            if s_owner == username and s_name == product_name:
+                continue
+
+            updated_sales.append(s)
+
+        save_sales(updated_sales)
 
         return {"status": "deleted", "product": product_name}
 
     except Exception as e:
         print("DELETE ERROR:", e)
-        return {"error": str(e)}
+        raise HTTPException(status_code=500, detail=str(e))
 
 # ════════════════════════════════════════════════════════════
 # DAILY SALES ENTRY
