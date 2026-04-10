@@ -43,7 +43,7 @@ export default function ProductManager() {
       setSuccess(`"${form.name}" added successfully.`);
       setError("");
 
-      setTimeout(() => setSuccess(""), 3000);
+      setTimeout(() => setSuccess(""), 1000);
 
       setForm({ name: "", price: "", supplier_cost: "", unit: "units" });
       fetchProducts();
@@ -52,7 +52,7 @@ export default function ProductManager() {
       setError(e.response?.data?.detail || "Failed to add product.");
       setSuccess("");
 
-      setTimeout(() => setError(""), 3000);
+      setTimeout(() => setError(""), 1000);
     }
 
     setLoading(false);

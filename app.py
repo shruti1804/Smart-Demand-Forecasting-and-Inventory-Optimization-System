@@ -12,16 +12,15 @@ import joblib, pandas as pd, numpy as np, io
 app = FastAPI(title="Demand Forecasting API")
 
 # CORS MUST be added immediately after app creation, before any routes
-# In app.py, update the allow_origins line:
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
         "http://localhost:3000",
-        "https://smart-demand-forecasting-and-invent.vercel.app/"   
+        "https://smart-demand-forecasting-and-invent.vercel.app"  
     ],
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
-    allow_credentials=True,
 )
 
 # ── Model loading ────────────────────────────────────────────
@@ -84,6 +83,14 @@ class OptimizeInput(BaseModel):
     avg_demand: float
     std_demand: float
     lead_time:  int = 5
+    
+# ═════════════════════════════════════════════════════════════
+# Backuop route to handle preflight CORS requests from frontend
+# ═════════════════════════════════════════════════════════════
+
+@app.options("/{rest_of_path:path}")
+def preflight_handler(rest_of_path: str):
+    return {"message": "OK"}
 
 # ════════════════════════════════════════════════════════════
 # AUTH
