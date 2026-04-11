@@ -173,6 +173,7 @@ body { font-family: 'Segoe UI', sans-serif; background: #f0f2f5; color: #1a1a2e;
   display: flex;
   flex-direction: column;
   gap: 4px;
+  text-align: center;
 }
 .metric-label { font-size: 11px; color: #777; text-transform: uppercase; letter-spacing: 0.4px; }
 .metric-value { font-size: 22px; font-weight: 700; color: #1a1a2e; }
